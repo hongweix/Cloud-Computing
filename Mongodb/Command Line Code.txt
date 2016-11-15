@@ -1,0 +1,63 @@
+Test FI:
+cd /home/ubuntu/SN2
+npm start
+
+Test BI:
+mvn clean package
+mvn exec:java
+
+Task1:
+Log db:
+mysql -h mydbinstance.c9neqpbucnp6.us-east-1.rds.amazonaws.com -u awsuser -p19920522
+use mytestdb
+
+Create 2 tables:
+drop table if exists `login_information`;
+create table `login_information`
+(
+`userId` real,
+`password` text,
+primary key (`userId`)
+)Engine=InnoDB DEFAULT CHARSET=latin1;
+
+drop table if exists `user_profile`;
+create table `user_profile`
+(
+`userId` real,
+`name` text,
+`imageUrl` text,
+primary key (`userId`)
+)Engine=InnoDB DEFAULT CHARSET=latin1;
+
+Load data:
+LOAD DATA LOCAL INFILE '/home/ubuntu/users.csv' INTO TABLE login_information CHARSET 'latin1' FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' (userId, password);
+
+LOAD DATA LOCAL INFILE '/home/ubuntu/userinfo.csv' INTO TABLE user_profile CHARSET 'latin1' FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' (userId, name, imageUrl);
+
+Task2:
+//sort to see each user's follower
+sort -t, -nk1,1 -nk2,2 < links.csv > follower.csv
+//sort to see each user's followee
+sort -t, -nk2,1 -nk1,2 < links.csv > followee.csv
+//merge each user's follower in one line
+awk 'BEGIN {FS=","} {if($1==x){i=i" "$2}else{if(NR>1){print i};i=$0};x=$1;y=$2} END{print i}' < follower.csv > hasfollower.csv
+//change column sequence
+awk -F, 'BEGIN {FS=","} {print $2","$1}' < followee.csv > a.csv
+//merge each user's followee in one line
+awk 'BEGIN {FS=","} {if($1==x){i=i" "$2}else{if(NR>1){print i};i=$0};x=$1;y=$2} END{print i}' < a.csv > hasfollowee.csv
+//merge to files together, the schema is userId, allfollower's id, allfollowee's id
+awk 'BEGIN {FS=","} NR==FNR {h[$1] = $2; next} {print $1","h[$1]","$2}' hasfollower.csv hasfollowee.csv > hasfollowerfollowee.csv
+
+Master private ip: 172.31.61.208
+dns: ec2-52-207-216-131.compute-1.amazonaws.com
+ssh -i Project34key.pem hadoop@ec2-52-207-216-131.compute-1.amazonaws.com
+
+hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.bulk.output=/hdfs/output -Dimporttsv.separator="," -Dimporttsv.columns=HBASE_ROW_KEY,data:follower,data:followee follow /hdfs/
+
+hbase org.apache.hadoop.hbase.mapreduce.LoadIncrementalHFiles /hdfs/output follow
+
+Task3:
+DNS: ec2-52-207-213-234.compute-1.amazonaws.com
+ssh -i Project34key.pem ubuntu@ec2-52-207-213-234.compute-1.amazonaws.com
+mongoimport --db test --collection posts --drop --file posts.json
+db.test.createIndex({uid:1})
