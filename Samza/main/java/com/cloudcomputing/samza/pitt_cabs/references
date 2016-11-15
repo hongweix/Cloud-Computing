@@ -1,0 +1,3 @@
+1. https://samza.apache.org/learn/documentation/latest/api/javadocs/index.html?org/apache/samza/storage/kv/KeyValueStore.html
+2. https://samza.apache.org/learn/documentation/0.7.0/api/javadocs/org/apache/samza/task/MessageCollector.html
+3. https://samza.apache.org/learn/documentation/0.7.0/api/javadocs/org/apache/samza/system/OutgoingMessageEnvelope.html
