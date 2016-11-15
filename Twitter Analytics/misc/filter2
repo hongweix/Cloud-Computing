@@ -1,0 +1,5 @@
+awk -F"\t" '{
+n = split($6, t, "#")
+for (i = 0; ++i <= n;)
+print $2"#"t[i]"#"$1"\t"$3"\t"$4"\t"$5
+}' <database_sort_1k > outputtest
