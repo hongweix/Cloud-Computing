@@ -1,0 +1,9 @@
+Materials:
+1. http://stackoverflow.com/questions/9625110/how-to-start-anonymous-thread-class
+2. The sample code for making HTTP connection, fetch the plain text of an web page from Distributed System class.
+3. http://www.java2novice.com/java_thread_examples/
+4. https://azure.microsoft.com/en-us/develop/java/
+5. https://azure.microsoft.com/en-us/documentation/articles/java-download-windows/
+
+People who I talked with for help:
+At first, I did not use multi-threading to deal with Health Check and Senior System Architect test, but found it is really difficult to arrive the rps required, then I discussed with my team member Yujie Li (yujiel) with the concepts of multi-threading and the idea of blocking one thread while still continuing other threads. Finally, I choose to use multi-threading to finish the last two test. 

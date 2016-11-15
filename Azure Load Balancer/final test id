@@ -1,0 +1,85 @@
+; MSB Senior System Architect Test
+; Test launched. Please check every minute for update.
+[Test Start]
+time=2016-02-14 15:52:05
+type=Senior
+testId=1455465125279
+testFile=test.1455465125279.log
+
+[Minute 1]
+rps=38.10
+
+[Minute 2]
+rps=37.60
+
+[Minute 3]
+rps=38.00
+
+[Minute 4]
+rps=34.20
+
+[Minute 5]
+rps=10.93
+
+[Minute 6]
+rps=31.30
+
+[Minute 7]
+rps=33.20
+
+[Minute 8]
+rps=34.90
+
+[Minute 9]
+rps=37.70
+
+[Minute 10]
+rps=37.80
+
+[Minute 11]
+rps=11.04
+
+[Minute 12]
+rps=32.60
+
+[Minute 13]
+rps=33.40
+
+[Minute 14]
+rps=37.60
+
+[Minute 15]
+rps=34.30
+
+[Minute 16]
+rps=37.90
+
+[Minute 17]
+rps=37.80
+
+[Minute 18]
+rps=38.20
+
+[Minute 19]
+rps=38.30
+
+[Minute 20]
+rps=36.80
+
+[Load Generator]
+andrewid=hongweix
+passwd=8wpvQvKzT46SH64Jmtk3wZNVti8gvKnM
+
+[Load Balancer]
+dns=cloud-729582vm.eastus.cloudapp.azure.com
+
+[Test End]
+time=2016-02-14 16:13:29
+rps=33
+
+[Data Center]
+count=3
+
+; MSB is validating...
+{"success":true,"message":"Your submission is in processing, submission token is:hongweix_p22-azure_89_1904769896 Wait and check your code, score and feedback on TPZ.","status":1200}
+; Test finished

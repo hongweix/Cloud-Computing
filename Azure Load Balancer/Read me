@@ -1,0 +1,5 @@
+There are four folders for each test. 
+
+For the Round Robin test and Custom Scheduling Algorithm test, you can just look the LoadBalancer.java and Main.java files, because I don’t create any Maven project. 
+
+For the Health Check test and Senior System Architect test, you should look the whole azureDemo folder, all java files including Main.java, LoadBalancer.java, Request.java etc are in the azureDemo folder, it is a maven project, I use mvn compile and sudo mvn exec:java -Dexec.mainClass=“Main” to run the test. In the pom file, the enter of the program is set to Main.java.
